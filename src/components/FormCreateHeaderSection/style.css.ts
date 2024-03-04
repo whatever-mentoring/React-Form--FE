@@ -1,7 +1,7 @@
 import { style } from '@vanilla-extract/css';
-import { theme } from './theme';
+import { theme } from '../../styles/theme';
 
-export const formHeaderSection = {
+export const formCreateHeaderSection = {
   container: style({
     width: '768px',
     borderTop: `10px solid ${theme.color.purple.secondary}`,

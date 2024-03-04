@@ -1,7 +1,7 @@
 import { style } from '@vanilla-extract/css';
-import { theme } from './theme';
+import { theme } from '../../../styles/theme';
 
-export const form = {
+export const formCreate = {
   container: style({
     padding: '20px 0 200px',
     backgroundColor: theme.color.purple.primary,
@@ -21,7 +21,7 @@ export const form = {
     position: 'absolute',
     right: '-50px',
     top: '0px',
-    height: '200px',
+    height: '34px',
     width: '44px',
     borderRadius: '10px',
     background: theme.color.white.primary,
@@ -39,6 +39,21 @@ export const form = {
     border: 'none',
     cursor: 'pointer',
     background: 'url(/src/assets/add_round.png) no-repeat right 7px center / 25px'
+  }),
+  buttonContainer: style({
+    width: '768px',        
+  }),
+  submitButton: style({
+    marginTop: '10px',
+    padding: '2px 28px',    
+    color: theme.color.white.primary,
+    fontSize: '14px',
+    fontWeight: '500',
+    borderRadius: '4px',
+    backgroundColor: theme.color.purple.secondary,
+    border: 'none',
+    lineHeight: '36px',
+    cursor: 'pointer'
   }),
 }
 

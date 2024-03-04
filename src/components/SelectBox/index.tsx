@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { selectbox } from '../styles/selectbox.css';
+import { selectbox } from './style.css.ts';
 
 interface Option {
   value: string;

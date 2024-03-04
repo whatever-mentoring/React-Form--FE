@@ -30,8 +30,4 @@ export async function postSurvey(survey: FormRequestType) {
   if (error) throw new Error(error.message)
   return true;
 }
-
-
-
-
  
