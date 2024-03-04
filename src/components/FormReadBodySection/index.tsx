@@ -1,10 +1,10 @@
 import { formReadBodySection } from './style.css.ts';
 import { FormBodySectionType } from '../../types/form.ts';
 
-function FormReadBodySection({ title, type, options }: FormBodySectionType) {   
+function FormReadBodySection({ title, type, options, required }: FormBodySectionType) {   
   return (
     <div className={formReadBodySection.container}>
-      <p className={formReadBodySection.title}>{title}</p>
+      <p className={formReadBodySection.title}>{title} {required && <span className={formReadBodySection.required}>*</span>}</p>
       {type === 'input' && <input type="text" placeholder='입력해주세요' className={formReadBodySection.textInput} />}
       {(type === 'radio' || type === 'checkbox') && (
         <div className={formReadBodySection.options}>

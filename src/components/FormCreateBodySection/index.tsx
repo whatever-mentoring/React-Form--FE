@@ -10,10 +10,12 @@ interface FormCreateBodySectionProps {
   setType: (newType: string) => void;  
   options: FormBodyOptionType[];
   setOptions: (newOptions: FormBodyOptionType[]) => void;
+  required: boolean;
+  setRequired: (newRequired: boolean) => void;
   deleteBodySection: (index: number) => void;
 }
 
-function FormCreateBodySection({ index, title, setTitle, type, setType, options, setOptions, deleteBodySection }: FormCreateBodySectionProps) {  
+function FormCreateBodySection({ index, title, setTitle, type, setType, options, setOptions, required, setRequired, deleteBodySection }: FormCreateBodySectionProps) {  
   const typeOptions = [
     { label: "단답형", value: "input" },
     { label: "객관식", value: "radio" },
@@ -65,9 +67,9 @@ function FormCreateBodySection({ index, title, setTitle, type, setType, options,
         <span className={formCreateBodySectionFooter.divider}/>
         <span className={formCreateBodySectionFooter.requiredToggle}>
           <p className={formCreateBodySectionFooter.requiredToggleText}>필수</p>
-          <input type="checkbox" className={formCreateBodySectionFooter.requiredToggleButton}/>
-        </span>        
-      </div>
+          <input type="checkbox" className={formCreateBodySectionFooter.requiredToggleButton} checked={required} onChange={(e) => setRequired(e.target.checked)} />
+        </span>  
+      </div>      
     </div>
   );
 }

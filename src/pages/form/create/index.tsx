@@ -10,10 +10,10 @@ import { formCreate } from './style.css.ts';
 function FormCreatePage() {  
   const navigate = useNavigate();
   const [formHeaderSection, setFormHeaderSection] = useState<FormHeaderSectionType>({ title: '', description: '' });
-  const [formBodySections, setFormBodySections] = useState<FormBodySectionType[]>([{ title: "", type: "input", options: [] }]);
+  const [formBodySections, setFormBodySections] = useState<FormBodySectionType[]>([{ title: "", type: "input", required: false, options: [] }]);
 
   const addBodySection = () => {
-    setFormBodySections([...formBodySections, { title: "", type: "input", options: [] }]);
+    setFormBodySections([...formBodySections, { title: "", type: "input", required: false, options: [] }]);
   };
 
   const updateBodySection = (index: number, field: keyof FormBodySectionType, value: any) => {
@@ -28,10 +28,7 @@ function FormCreatePage() {
     const newUuid = uuid();
     const survey = {
       uuid: newUuid,
-      headerSection: {
-        title: formHeaderSection.title,
-        description: formHeaderSection.description,
-      },
+      headerSection: formHeaderSection,
       bodySections: formBodySections        
     }      
 
@@ -62,7 +59,9 @@ function FormCreatePage() {
             setType={(newType) => updateBodySection(index, 'type', newType)}          
             options={section.options}
             setOptions={(newOptions) => updateBodySection(index, 'options', newOptions)}     
-            deleteBodySection={(index) => deleteBodySection(index)}     
+            required={section.required}
+            setRequired={(newRequired) => updateBodySection(index, 'required', newRequired)}
+            deleteBodySection={(index) => deleteBodySection(index)}
           />                   
           {index === formBodySections.length - 1 && (
             <div className={formCreate.sidebar}>

@@ -33,5 +33,10 @@ export const formReadBodySection = {
     display: 'flex',
     gap: '10px',
     fontSize: '16px'
+  }),
+  required: style({        
+    marginLeft: '4px',
+    fontSize: '16px',
+    color: theme.color.red.primary
   })
 }

@@ -33,6 +33,7 @@ function FormReadPage() {
       {questions.bodySections.map((section, index) => (        
         <FormReadBodySection            
           key={index}
+          required={section.required}
           title={section.title}          
           type={section.type}          
           options={section.options}          

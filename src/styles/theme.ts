@@ -19,6 +19,9 @@ export const theme = {
     },
     black: {
       primary: '#000'
+    },
+    red: {
+      primary: 'red'
     }
   }
 }

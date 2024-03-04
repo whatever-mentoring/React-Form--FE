@@ -11,6 +11,7 @@ export interface FormBodyOptionType {
 export interface FormBodySectionType {
   title: string;
   type: 'input' | 'radio' | 'checkbox';
+  required: boolean;
   options: FormBodyOptionType[];
 }
 
