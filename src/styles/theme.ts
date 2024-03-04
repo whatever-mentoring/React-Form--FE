@@ -11,6 +11,7 @@ export const theme = {
     gray: {
       primary: 'gray',
       secondary: 'lightgray',
+      tertiary: 'rgb(218,220,224)',
       brightest: 'rgb(248,249,250)'
     },
     white: {
@@ -18,6 +19,9 @@ export const theme = {
     },
     black: {
       primary: '#000'
+    },
+    red: {
+      primary: 'red'
     }
   }
 }

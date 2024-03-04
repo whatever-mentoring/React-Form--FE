@@ -1,18 +1,18 @@
 import { globalStyle, style } from '@vanilla-extract/css';
-import { theme } from './theme';
+import { theme } from '../../styles/theme';
 
-export const formBodySection = {
+export const formCreateBodySection = {
   container: style({
     width: '768px',
     borderRadius: '8px',
     backgroundColor: theme.color.white.primary,  
-    padding: "24px",      
+    padding: "24px 24px 0",      
     boxSizing: "border-box",    
   })
 };
 
 
-export const formBodySectionHeader = {
+export const formCreateBodySectionHeader = {
   container: style({
     width: '100%',
     display: 'flex',
@@ -42,13 +42,13 @@ export const formBodySectionHeader = {
   })
 }
 
-export const formBodySectionContent = {
+export const formCreateBodySectionContent = {
   container: style({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
     gap: '20px',
-    margin: '20px 0'    
+    margin: '20px 0 40px'    
   }),
   textInput: style({
     width: '370px',
@@ -89,5 +89,70 @@ export const formBodySectionContent = {
     marginLeft: '10px',    
     cursor: 'pointer'
   })
+}
+
+export const formCreateBodySectionFooter = {
+  container: style({
+    width: '100%',
+    height: '65px',
+    borderTop: `1px solid ${theme.color.gray.tertiary}`,
+    display: 'flex',
+    justifyContent: 'end',
+    alignItems: 'center',
+    gap: '22px',    
+  }),
+  deleteButton: style({
+    width: '19px',
+    height: '19px',
+    background: 'url(/src/assets/delete.png) no-repeat center / 100%', 
+    border: 'none',
+    cursor: 'pointer',    
+  }),
+  divider: style({   
+    borderLeft: `1px solid rgb(218,220,224)`,
+    height: '32px', 
+  }),
+  requiredToggle: style({
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px'
+  }),
+  requiredToggleText: style({
+    fontSize: '14px',
+    fontWeight: '400',    
+  }),
+  requiredToggleButton: style({    
+    appearance: 'none',    
+    position: 'relative',
+    border: 'none',
+    width: '40px',
+    height: '15px',    
+    borderRadius: '10px',
+    cursor: 'pointer',
+    backgroundColor: theme.color.gray.secondary,
+    '::before': {
+      content: '',
+      position: 'absolute',      
+      top: '-3px',
+      right: '20px',
+      width: '20px',
+      height: '20px',
+      backgroundColor: theme.color.white.primary,
+      boxShadow: '0 2px 4px 0 rgba(0, 0, 0, 0.2)',
+      borderRadius: '50%',
+      transition: '0.3s',
+    },
+    selectors: {
+      '&:checked': {
+        backgroundColor: theme.color.purple.primary,        
+      },      
+      '&:checked::before': {
+        right: '0px',
+        backgroundColor: theme.color.purple.secondary,        
+      }      
+    },
+  })
+
+
 }
 
