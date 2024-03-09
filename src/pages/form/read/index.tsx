@@ -21,9 +21,7 @@ function FormReadPage() {
     getQuestions()
   }, [])
 
-  if (!questions) {
-    return <div>Loading...</div>
-  }
+  if (!questions) return <></>;  
 
   return (
     <div className={formRead.container}>

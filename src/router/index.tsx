@@ -1,8 +1,11 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import HomePage from "../pages/home";
-import FormCreatePage from "../pages/form/create";
-import FormReadPage from "../pages/form/read";
+import { Suspense, lazy } from "react";
 import ErrorBoundary from "../components/error/ErrorBoundary";
+import Loading from "../components/common/Loading.tsx";
+const HomePage = lazy(() => import('../pages/home'));
+const FormCreatePage = lazy(() => import('../pages/form/create'));
+const FormReadPage = lazy(() => import('../pages/form/read'));
+
 
 function Router() {
   const routes = createBrowserRouter([
@@ -10,7 +13,9 @@ function Router() {
       path: "/",
       element: (
         <ErrorBoundary>
-          <HomePage />
+          <Suspense fallback={<Loading />}>
+            <HomePage />
+          </Suspense>
         </ErrorBoundary>
       )    
     },
@@ -18,7 +23,9 @@ function Router() {
       path: "/form/create",
       element: (
         <ErrorBoundary>
-          <FormCreatePage />
+          <Suspense fallback={<Loading />}>
+            <FormCreatePage />
+          </Suspense>
         </ErrorBoundary>
       ),    
     },
@@ -26,7 +33,9 @@ function Router() {
       path: "/form/read/:uuid",
       element: (
         <ErrorBoundary>
-          <FormReadPage />
+          <Suspense fallback={<Loading />}>
+            <FormReadPage />
+          </Suspense>
         </ErrorBoundary>
       ),
     },
