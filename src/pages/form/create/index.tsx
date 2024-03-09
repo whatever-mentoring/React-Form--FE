@@ -3,8 +3,8 @@ import uuid from 'react-uuid';
 import { useNavigate } from 'react-router-dom';
 import { FormHeaderSectionType, FormBodySectionType } from '../../../types/form.ts';
 import { postSurvey } from '../../../apis/survey.ts';
-import FormCreateHeaderSection from '../../../components/FormCreateHeaderSection/index.tsx';
-import FormCreateBodySection from '../../../components/FormCreateBodySection/index.tsx';
+import FormCreateHeaderSection from '../../../components/form/FormCreateHeaderSection/index.tsx';
+import FormCreateBodySection from '../../../components/form/FormCreateBodySection/index.tsx';
 import { formCreate } from './style.css.ts';
 
 function FormCreatePage() {  
@@ -31,15 +31,11 @@ function FormCreatePage() {
       headerSection: formHeaderSection,
       bodySections: formBodySections        
     }      
-
-    try {
-      const response = await postSurvey(survey);
-      if (response) {
-        navigate(`/form/read/${newUuid}`);
-      }              
-    } catch (error) {
-      console.error('Error posting questions:', error);
-    }
+            
+    const response = await postSurvey(survey);
+    if (response) {
+      navigate(`/form/read/${newUuid}`);
+    }                  
   };
 
   return (

@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import { getSurvey } from "../../../apis/survey.ts";
 import { FormResponseType } from "../../../types/form.ts";
 import { formRead } from './style.css.ts';
-import FormReadHeaderSection from "../../../components/FormReadHeaderSection/index.tsx";
-import FormReadBodySection from "../../../components/FormReadBodySection/index.tsx";
+import FormReadHeaderSection from "../../../components/form/FormReadHeaderSection/index.tsx";
+import FormReadBodySection from "../../../components/form/FormReadBodySection/index.tsx";
 
 function FormReadPage() { 
   const { uuid } = useParams();
