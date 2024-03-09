@@ -1,6 +1,6 @@
 import { formCreateBodySection, formCreateBodySectionHeader, formCreateBodySectionContent, formCreateBodySectionFooter } from './style.css.ts';
-import SelectBox from '../SelectBox/index.tsx';
-import { FormBodyOptionType } from '../../types/form.ts';
+import SelectBox from '../../common/SelectBox/index.tsx';
+import { FormBodyOptionType } from '../../../types/form.ts';
 
 interface FormCreateBodySectionProps {
   index: number;

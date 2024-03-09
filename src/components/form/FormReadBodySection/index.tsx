@@ -1,5 +1,5 @@
 import { formReadBodySection } from './style.css.ts';
-import { FormBodySectionType } from '../../types/form.ts';
+import { FormBodySectionType } from '../../../types/form.ts';
 
 function FormReadBodySection({ title, type, options, required }: FormBodySectionType) {   
   return (
