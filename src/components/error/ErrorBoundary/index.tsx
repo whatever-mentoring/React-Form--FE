@@ -5,7 +5,7 @@ interface ErrorBoundaryProps {
   children: React.ReactNode;
 }
 
-interface ErrorBoundaryState {
+export interface ErrorBoundaryState {
   hasError: boolean;
   error: Error | null;
 }
@@ -15,10 +15,18 @@ interface ErrorBoundaryState {
 class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props); 
-    this.state = { 
+    this.state = this.initState();
+  }
+
+  initState(): ErrorBoundaryState {
+    return { 
       hasError: false,
       error: null
     };    
+  }
+
+  resetState() {
+    this.setState(this.initState());
   }
 
   static getDerivedStateFromError(error: Error): ErrorBoundaryState {
@@ -40,7 +48,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
       //   return <ServerError />
       // }      
       return (
-        <DefaultError />
+        <DefaultError onResetError={this.resetState} />
       )            
     }        
 
