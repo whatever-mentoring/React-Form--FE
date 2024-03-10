@@ -1,16 +1,17 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useCreateSurvey } from '../../../queries/hooks/useSurvey.ts';
 import uuid from 'react-uuid';
-import { useNavigate } from 'react-router-dom';
 import { FormHeaderSectionType, FormBodySectionType } from '../../../types/form.ts';
-import { postSurvey } from '../../../apis/survey.ts';
 import FormCreateHeaderSection from '../../../components/form/FormCreateHeaderSection/index.tsx';
 import FormCreateBodySection from '../../../components/form/FormCreateBodySection/index.tsx';
 import { formCreate } from './style.css.ts';
 
-function FormCreatePage() {  
-  const navigate = useNavigate();
+
+function FormCreatePage() {      
+  const [formUuid, setFormUuid] = useState('');  
   const [formHeaderSection, setFormHeaderSection] = useState<FormHeaderSectionType>({ title: '', description: '' });
   const [formBodySections, setFormBodySections] = useState<FormBodySectionType[]>([{ title: "", type: "input", required: false, options: [] }]);
+  const { mutateAsync } = useCreateSurvey(formUuid);
 
   const addBodySection = () => {
     setFormBodySections([...formBodySections, { title: "", type: "input", required: false, options: [] }]);
@@ -24,19 +25,19 @@ function FormCreatePage() {
     setFormBodySections(formBodySections.filter((_, i) => i !== index));
   };
 
-  const handlePostQuestions = async () => {
-    const newUuid = uuid();
+  const handlePostQuestions = () => {    
     const survey = {
-      uuid: newUuid,
+      uuid: formUuid,
       headerSection: formHeaderSection,
       bodySections: formBodySections        
     }      
-            
-    const response = await postSurvey(survey);
-    if (response) {
-      navigate(`/form/read/${newUuid}`);
-    }                  
+    mutateAsync(survey);          
   };
+
+  useEffect(() => {
+    const id = uuid();
+    setFormUuid(id);
+  }, []);
 
   return (
     <div className={formCreate.container}>
