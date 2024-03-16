@@ -3,7 +3,7 @@ import { theme } from '../../../styles/theme';
 
 export const formCreate = {
   container: style({
-    padding: '20px 0 200px',
+    padding: '120px 0 200px',
     backgroundColor: theme.color.purple.primary,
     width: '100%',
     minHeight: '100vh',
@@ -21,8 +21,8 @@ export const formCreate = {
     position: 'absolute',
     right: '-50px',
     top: '0px',
-    height: '34px',
-    width: '44px',
+    height: '32px',
+    width: '42px',
     borderRadius: '10px',
     background: theme.color.white.primary,
     display: 'flex',    
@@ -38,22 +38,8 @@ export const formCreate = {
     margin: '0 auto',
     border: 'none',
     cursor: 'pointer',
-    background: 'url(/src/assets/add_round.png) no-repeat right 7px center / 25px'
-  }),
-  buttonContainer: style({
-    width: '768px',        
-  }),
-  submitButton: style({
-    marginTop: '10px',
-    padding: '2px 28px',    
-    color: theme.color.white.primary,
-    fontSize: '14px',
-    fontWeight: '500',
-    borderRadius: '4px',
-    backgroundColor: theme.color.purple.secondary,
-    border: 'none',
-    lineHeight: '36px',
-    cursor: 'pointer'
+    background: 'url(/src/assets/add_round.png) no-repeat right 7px center / 25px',
+    marginLeft: '10px',
   }),
 }
 
