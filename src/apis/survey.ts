@@ -1,4 +1,4 @@
-import { supabase } from '../supabaseClient'
+import { supabase } from '../clients/supabaseClient'
 import { FormRequestType, FormResponseType } from '../types/form';
 
 export async function getSurvey(uuid?: string): Promise<FormResponseType> {
