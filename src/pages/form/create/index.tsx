@@ -1,18 +1,21 @@
+import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react'
-import { useCreateSurvey } from '../../../queries/hooks/useSurvey.ts';
-import uuid from 'react-uuid';
+import { useCreateSurvey, useUpdateSurvey } from '../../../queries/hooks/useSurvey.ts';
+import { useGetSurvey } from "../../../queries/hooks/useSurvey.ts";
 import { FormHeaderSectionType, FormBodySectionType } from '../../../types/form.ts';
 import FormCreateHeaderSection from '../../../components/form/FormCreateHeaderSection/index.tsx';
 import FormCreateBodySection from '../../../components/form/FormCreateBodySection/index.tsx';
+import FormHeader from '../../../components/form/FormHeader/index.tsx';
 import { formCreate } from './style.css.ts';
 
-
 function FormCreatePage() {      
-  const [formUuid, setFormUuid] = useState('');  
+  const { uuid } = useParams();
+  const { data: questions } = useGetSurvey(uuid);
+  const { mutateAsync: createSurvey } = useCreateSurvey();
+  const { mutateAsync: updateSurvey } = useUpdateSurvey();  
   const [formHeaderSection, setFormHeaderSection] = useState<FormHeaderSectionType>({ title: '', description: '' });
   const [formBodySections, setFormBodySections] = useState<FormBodySectionType[]>([{ title: "", type: "input", required: false, options: [] }]);
-  const { mutateAsync } = useCreateSurvey(formUuid);
-
+  
   const addBodySection = () => {
     setFormBodySections([...formBodySections, { title: "", type: "input", required: false, options: [] }]);
   };
@@ -27,20 +30,29 @@ function FormCreatePage() {
 
   const handlePostQuestions = () => {    
     const survey = {
-      uuid: formUuid,
+      uuid: uuid ? uuid : '',
       headerSection: formHeaderSection,
       bodySections: formBodySections        
     }      
-    mutateAsync(survey);          
+
+    if (questions) {
+      updateSurvey(survey);
+    } else {
+      createSurvey(survey);
+    }          
   };
 
+  /* 존재하는 데이터일 경우 */
   useEffect(() => {
-    const id = uuid();
-    setFormUuid(id);
-  }, []);
+    if (questions) {      
+      setFormHeaderSection(questions.headerSection);
+      setFormBodySections(questions.bodySections);
+    }
+  },[questions])
 
   return (
     <div className={formCreate.container}>
+      <FormHeader onSubmit={handlePostQuestions} uuid={uuid}/>
       <FormCreateHeaderSection 
         title={formHeaderSection.title} 
         setTitle={(title: string) => setFormHeaderSection(({...formHeaderSection, title}))} 
@@ -62,14 +74,11 @@ function FormCreatePage() {
           />                   
           {index === formBodySections.length - 1 && (
             <div className={formCreate.sidebar}>
-              <button className={formCreate.bodySectionAddButton} onClick={addBodySection} style={{ marginLeft: '10px' }}/>              
+              <button className={formCreate.bodySectionAddButton} onClick={addBodySection}/>              
             </div>
           )}          
         </div>
-      ))}
-      <div className={formCreate.buttonContainer}>
-        <button className={formCreate.submitButton} onClick={handlePostQuestions}>등록하기</button>
-      </div>      
+      ))} 
     </div>
   )
 }

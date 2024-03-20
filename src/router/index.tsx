@@ -15,9 +15,9 @@ function Router() {
       )    
     },
     {
-      path: "/form/create",
+      path: "/form/create/:uuid",
       element: (
-        <PageLayout>
+        <PageLayout>          
           <FormCreatePage />          
         </PageLayout>
       ),

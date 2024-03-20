@@ -3,10 +3,11 @@ import { useGetSurvey } from "../../../queries/hooks/useSurvey.ts";
 import { formRead } from './style.css.ts';
 import FormReadHeaderSection from "../../../components/form/FormReadHeaderSection/index.tsx";
 import FormReadBodySection from "../../../components/form/FormReadBodySection/index.tsx";
+import { base64Converter } from '../../../utils/base64Converter.ts';
 
 function FormReadPage() { 
   const { uuid } = useParams();
-  const { data: questions } = useGetSurvey(uuid);
+  const { data: questions } = useGetSurvey(uuid ? base64Converter.decode(uuid) : '');
 
   if (!questions) return <></>;  
 

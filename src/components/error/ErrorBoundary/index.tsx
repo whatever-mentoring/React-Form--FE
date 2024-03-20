@@ -1,5 +1,6 @@
 import React from 'react';
 import DefaultError from '../DefaultError';
+import * as Sentry from "@sentry/react";
 
 interface ErrorBoundaryProps {
   children: React.ReactNode;
@@ -30,6 +31,11 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
   }
 
   static getDerivedStateFromError(error: Error): ErrorBoundaryState {
+    Sentry.withScope((scope) => {
+      scope.setLevel("fatal");
+      Sentry.captureException(error);
+    });
+
     return { 
       hasError: true,
       error

@@ -4,8 +4,10 @@ import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom/client'
 import Router from './router';
 import './styles/index.css'
+import { initializeSentry } from './clients/initializeSentry';
 
 const queryClient = new QueryClient();
+initializeSentry();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(  
   <React.StrictMode>
